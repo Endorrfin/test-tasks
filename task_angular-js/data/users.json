@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "firstName": "Ivan",
+    "lastName": "Franko",
+    "email": "franko@com.ua",
+    "password": "1234a5678",
+    "type": "admin"
+  },
+  {
+    "id": 2,
+    "firstName": "Taras",
+    "lastName": "Shevchenko",
+    "email": "shevchenko@com.ua",
+    "password": "1234b5678",
+    "type": "driver"
+  },
+  {
+    "id": 3,
+    "firstName": "Lesya",
+    "lastName": "Ukrainka",
+    "email": "ukrainka@com.ua",
+    "password": "1234c5678",
+    "type": "driver"
+  },
+  {
+    "id": 4,
+    "firstName": "Bohdan",
+    "lastName": "Khmelnytsky",
+    "email": "khmelnytsky@com.ua",
+    "password": "1234d5678",
+    "type": "driver"
+  },
+  {
+    "id": 5,
+    "firstName": "Hryhorii",
+    "lastName": "Skovoroda",
+    "email": "skovoroda@com.ua",
+    "password": "1234e5678",
+    "type": "admin"
+  },
+  {
+    "id": 6,
+    "firstName": "Volodymyr",
+    "lastName": "Vernadsky",
+    "email": "vernadsky@com.ua",
+    "password": "1234f5678",
+    "type": "admin"
+  },
+  {
+    "id": 7,
+    "firstName": "Volodymyr",
+    "lastName": "Vernadsky",
+    "email": "vernadsky@com.ua",
+    "password": "1234f5678",
+    "type": "admin"
+  },
+  {
+    "id": 8,
+    "firstName": "Volodymyr",
+    "lastName": "Vernadsky",
+    "email": "vernadsky@com.ua",
+    "password": "1234f5678",
+    "type": "admin"
+  }
+]

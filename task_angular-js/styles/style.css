@@ -1,0 +1,153 @@
+
+* {
+    box-sizing: border-box;
+}
+
+
+/*FORM */
+.from-container {
+    display: block;
+    background: #f4f4f4;
+    max-width: 850px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 40px;
+    text-align: center;
+    position: relative;
+    font-size: 15px;
+}
+
+.form-title {
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 15px 0 5px;
+}
+
+.form-title::after {
+    content: "*";
+    margin-left: 4px;
+    color: red;
+    font-weight: bold;
+}
+
+.tips-group {
+    display: flex;
+}
+
+input, select {
+    width: 100%;
+    display: inline-block;
+    font-weight: 100;
+    padding: 15px;
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #3f3f3f;
+}
+
+.btn-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    min-width: 60px;
+    min-height: 26px;
+    background-color: cornflowerblue;
+    border: 0;
+    border-radius: 5%;
+    padding: 12px 24px;
+    font-size: 22px;
+
+}
+
+.icon-add {
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.error {
+    margin-top: 0px;
+    color: red;
+}
+
+
+
+/*USER LIST */
+.list__container {
+    margin: 20px;
+}
+
+.list__title {
+    font-size: 24px;
+    padding-top: 10px;
+    font-family: sans-serif;
+    color: #555549;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    border: 1px solid lightblue;
+}
+
+.table__tr--th {
+    font-size: 24px;
+    background-color: #d9ffd9;
+}
+
+.table__tr:nth-child(2n) {
+    background-color: #f0ffff;
+}
+
+.table__th {
+    padding: 20px;
+    border: 1px solid #333;
+}
+
+.table__td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.table__td--actions {
+    /*background-color: #d8f8d8;*/
+}
+
+.icon {
+    font-size: 32px;
+    cursor: pointer;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.icon-edit {
+    color: green;
+    margin-right: 10px;
+}
+
+.icon-delete {
+    color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

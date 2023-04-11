@@ -1,0 +1,149 @@
+<div class="wrapper" ng-app="myApp" ng-controller="formController">
+
+    <div class="from-container">
+        <p ng-show="msg">{{msg}}</p>
+
+        <a href="#" ng-click="searchUser()">{{title}}</a>
+
+        <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate ng-hide="ifSearchUser">
+            <div class="form-group"
+                 ng-class="{ 'has-error' : userFrom.firstname.$invalid && !userForm.firstname.$pristine }">
+                <label class="form-title" for="firstname">First name</label>
+
+                <input type="text"
+                       ng-class="{'has-error' : userForm.firstName.$invalid}"
+                       id="firstname"
+                       class="form-control"
+                       name="firstname"
+                       placeholder="First name"
+                       ng-model="newUser.firstName"
+                       ng-minlength="3"
+                       ng-maxlength="24"
+                       data-user-unique="{property: 'firstname'}"
+                       ng-required="true">
+                <div class="tips-group">
+                    <p ng-show="userForm.firstname.$dirty && userForm.firstname.$error.required" class="error">First name is required</p>
+                    <p ng-show="userForm.firstname.$error.minlength" class="error">First name is too short</p>
+                    <p ng-show="userForm.firstname.$error.maxlength" class="error">First name is too long</p>
+                    <p ng-show="userFrom.firstname.$dirty && userForm.firstname.$error.unique" class="error">Current name already exist in DB</p>
+                </div>
+
+            </div>
+
+            <div class="form-group"
+                 ng-class="{ 'has-error' : userFrom.lastname.$invalid && !userForm.lastname.$pristine }">
+                <label class="form-title" for="lastname">Last name</label>
+                <input type="text"
+                       id="lastname"
+                       class="form-control"
+                       name="lastname"
+                       placeholder="Last name"
+                       ng-model="newUser.lastName"
+                       ng-required="true">
+                <div class="tips-group">
+                    <p ng-show="userForm.lastname.$dirty && userForm.lastname.$error.required" class="error">Last name is required</p>
+                </div>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+                <label class="form-title" for="email">Email</label>
+                <input type="email"
+                       id="email"
+                       class="form-control"
+                       name="email"
+                       placeholder="Email"
+                       ng-model="newUser.email"
+                       ng-required="true">
+                <div class="tips-group">
+<!--                    <p ng-show="userForm.email.$dirty && userForm.email.$error.required" class="error">Email is required</p>-->
+                    <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="error">Enter your correct email</p>
+                </div>
+            </div>
+            
+                <div class="form-group"
+                     ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+                    <label class="form-title" for="password">Password</label>
+                    <input type="password"
+                           id="password"
+                           class="form-control"
+                           name="password"
+                           placeholder="Password"
+                           ng-model="newUser.password"
+                           ng-minlength="8"
+                           ng-required="true"
+                           digit-letter-contains="^([a-zA-Z0-9]+)$"
+                    >
+                    <div class="tips-group">
+<!--                        <p ng-show="userForm.password.$dirty && userForm.password.$error.required" class="error">Password is required</p>-->
+                        <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="error">Password must be 8 characters includes 1 digit and 1 letter</p>
+                    </div>
+                </div>
+
+
+            <div class="form-group"
+                 ng-class="{ 'has-error' : userForm.type.$invalid && !userForm.type.$pristine }">
+                <label class="form-title" for="type">User type</label>
+                <select name="type"
+                        id="type"
+                        class="form-control"
+                        ng-model="newUser.type"
+                        ng-required="true">
+                    <option value="option-0"></option>
+                    <option value="option-1">Admin</option>
+                    <option value="option-2">Driver</option>
+                </select>
+                <div class="tips-group">
+                    <p ng-show="userForm.type.$dirty && userForm.type.$error.required" class="error">Field type is required</p>
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-submit"
+                    ng-disabled=userForm.$invalid ng-click="saveUser()">
+                <span class="material-symbols-outlined icon-add">add</span>
+                Submit
+            </button>
+        </form>
+
+    </div>
+
+
+    <div class="list-container">
+        <h>++++ {{userCount2}} ++++</h>
+        <h4 class="list__count">Count of users: {{userCount}}</h4>
+        <table class="table" ng-show="usersCount">
+            <thead class="table__head">
+            <tr class="table__tr table__tr--th">
+                <th class="table__th">ID</th>
+                <th class="table__th">First name</th>
+                <th class="table__th">Last name</th>
+                <th class="table__th">Email</th>
+                <th class="table__th">Password</th>
+                <th class="table__th">User type</th>
+                <th ng-if="!ifSearchUser" class="table__th">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody class="table__body">
+            <tr class="table__tr table__tr--td" ng-repeat="user in users">
+                <td class="table__td">{{user.id}}</td>
+                <td class="table__td">{{user.firstName}}</td>
+                <td class="table__td">{{user.lastName}}</td>
+                <td class="table__td">{{user.email}}</td>
+                <td class="table__td">{{user.password}}</td>
+                <td class="table__td">{{user.type}}</td>
+                <td class="table__td">
+                    <div class="table__td--actions" ng-if="!ifSearchUser">
+                        <a href="#" ng-click="edit(user.id)" class="material-symbols-outlined icon icon-edit">edit</a>
+                        <a href="#" ng-click="delete(user.id)" class="material-symbols-outlined icon icon-delete">delete</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,51 @@
+
+<div class="from-container">
+    <input type="text" ng-model="myVal">
+</div>
+
+
+
+<div class="list__container" ng-app="myApp" ng-controller="listController">
+<!--<div class="list__container" ng-app="myApp" ng-controller="listController" ng-if="users && users.length">-->
+    <h3 class="list__title">User list in [list.html]</h3>
+    <h4 class="list__count">Count of users: {{userCount}}</h4>
+    <a href="">{{title}}</a>
+    <table class="table" ng-show="usersCount">
+        <thead class="table__head">
+        <tr class="table__tr table__tr--th">
+            <th class="table__th">ID</th>
+            <th class="table__th">First name</th>
+            <th class="table__th">Last name</th>
+            <th class="table__th">Email</th>
+            <th class="table__th">Password</th>
+            <th class="table__th">User type</th>
+            <th class="table__th">Actions</th>
+            <th ng-if="!ifSearchUser">Action</th>
+        </tr>
+        </thead>
+
+        <tbody class="table__body">
+        <tr class="table__tr table__tr--td" ng-repeat="user in users">
+            <td class="table__td">{{user.id}}</td>
+            <td class="table__td">{{user.firstName}}</td>
+            <td class="table__td">{{user.lastName}}</td>
+            <td class="table__td">{{user.email}}</td>
+            <td class="table__td">{{user.password}}</td>
+            <td class="table__td">{{user.type}}</td>
+            <td class="table__td">
+                <div class="table__td--actions">
+                    <span class="material-symbols-outlined icon icon-edit">edit</span>
+                    <span class="material-symbols-outlined icon icon-delete">delete</span>
+                </div>
+            </td>
+<!--            <td ng-if="!ifSearchUser">-->
+            <td>
+                <a href="#" ng-click="edit(user.id)" role = "button" class = "btn btn-info">edit</a>
+                <a href="#" ng-click="delete(user.id)" role = "button" class = "btn btn-danger">delete</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
