@@ -212,7 +212,8 @@ myApp.service('userService', function($http) {
       const alphabetUpperCase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
       const regex = /\d/;
-      if (regex.test(value)) {
+      const regexLetter = "^(?=[^A-Za-z]*[A-Za-z])[\x00-\x7F]*$";
+      if (regex.test(value) && regexLetter.test(value)) {
         return true;
       }
       return false;
