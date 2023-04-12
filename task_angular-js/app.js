@@ -198,8 +198,22 @@ myApp.service('userService', function($http) {
       const users = this.list();
       for(let user of users) {
         if (user.firstName === newUser) {
-          return true
+          return false
         }
+      }
+      return true;
+    }
+  }
+
+  this.checkDigitLetterContain = function(value) {
+    if(value !== undefined) {
+      const numbers = ['0','1','2','3','4','5','6','7','8','9'];
+      const alphabetLowerCasy = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+      const alphabetUpperCase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+      const regex = /\d/;
+      if (regex.test(value)) {
+        return true;
       }
       return false;
     }
@@ -213,70 +227,36 @@ myApp.directive('userUnique', ['userService', function(userService) {
     restrict: 'A',
     require: 'ngModel',
     link: function(scope, element, attrs, ngModel) {
-      debugger;
       element.bind('blur', function(e) {
         if(!ngModel || !element.val()) return;
-        var currentValue = element.val();
-        var result = userService.checkUniqueUser(currentValue);
+        let currentValue = element.val();
+        let result = userService.checkUniqueUser(currentValue);
         debugger;
-        ngModel.$setValidity('unique', !result);
+        ngModel.$setValidity('unique', result);
       });
     }
   }
 }]);
 
-
-myApp.directive('dlContains', function() {
+myApp.directive('includesDigitLetter', ['userService', function(userService) {
   return {
-    require: 'ngModel', // need to add ngModel in element
     restrict: 'EAC',
-    link: function(scope, element, attr, mCtrl) {
-      function myValidation(value) { // can set the function name as per you requirement
-        // if(value.indexOf("ab") > -1) {
-        if(value.includes("ab")) {
-          mCtrl.$setValidity('password', true);
-        } else {
-          mCtrl.$setValidity('password', false);
-        }
-        return value;
-      }
-
-      mCtrl.$parsers.push(myValidation());
-    }
-  };
-});
-
-
-myApp.directive('digitLetterContains', function() {
-  return {
-    restrict: 'A',
-    link: function(scope, elem, attrs, ctrl) {
-      var regex = attrs.digitLetterContains;
-      elem.bind('keypress', function(event) {
-        var input = elem.val() + event.key;
-        var validator = new RegExp(regex);
-        if(!validator.test(input)) {
-          event.preventDefault();
-          return false;
-        }
-      });
-    }
-  };
-});
-
-
-myApp.directive('mitOneDigit', function() {
-  return {
-    restrict: 'A',
     require: 'ngModel',
-    link: function($scope, $element, $attrs, ngModel) {
-      $scope.$watch($attrs.ngModel, function(value) {
-        // var isValid = (value > 3 && value < 100);
-        var isValid = (value > 3 && value < 100);
-        ngModel.$setValidity($attrs.ngModel, isValid);
+    link: function(scope, element, attrs, ngModel) {
+      element.bind('blur', function(e) {
+        if(!ngModel || !element.val()) return;
+        let currentValue = element.val();
+        let result = userService.checkDigitLetterContain(currentValue);
+        debugger;
+        if(result) {
+          ngModel.$setValidity('includes', true);
+        } else {
+          ngModel.$setValidity('includes', false);
+        }
       });
     }
-  };
-});
+  }
+}]);
+
 
 

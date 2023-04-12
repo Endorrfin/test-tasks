@@ -1,8 +1,6 @@
 <div class="wrapper" ng-app="myApp" ng-controller="formController">
 
     <div class="from-container">
-        <p ng-show="msg">{{msg}}</p>
-
         <a href="#" ng-click="searchUser()">{{title}}</a>
 
         <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate ng-hide="ifSearchUser">
@@ -26,6 +24,7 @@
                     <p ng-show="userForm.firstname.$error.minlength" class="error">First name is too short</p>
                     <p ng-show="userForm.firstname.$error.maxlength" class="error">First name is too long</p>
                     <p ng-show="userFrom.firstname.$dirty && userForm.firstname.$error.unique" class="error">Current name already exist in DB</p>
+                    <p ng-if="userForm.firstname.$error.unique" class="error">---> Current name already exist in DB</p>
                 </div>
 
             </div>
@@ -42,6 +41,7 @@
                        ng-required="true">
                 <div class="tips-group">
                     <p ng-show="userForm.lastname.$dirty && userForm.lastname.$error.required" class="error">Last name is required</p>
+                    <p ng-show="userForm.lastname.$dirty && userForm.lastname.$error.required" class="error">Last name is required</p>
                 </div>
             </div>
 
@@ -56,7 +56,6 @@
                        ng-model="newUser.email"
                        ng-required="true">
                 <div class="tips-group">
-<!--                    <p ng-show="userForm.email.$dirty && userForm.email.$error.required" class="error">Email is required</p>-->
                     <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="error">Enter your correct email</p>
                 </div>
             </div>
@@ -65,6 +64,7 @@
                      ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
                     <label class="form-title" for="password">Password</label>
                     <input type="password"
+                           ng-class="{'has-error' : userForm.password.$invalid}"
                            id="password"
                            class="form-control"
                            name="password"
@@ -72,11 +72,11 @@
                            ng-model="newUser.password"
                            ng-minlength="8"
                            ng-required="true"
-                           digit-letter-contains="^([a-zA-Z0-9]+)$"
+                           data-includes-digit-letter="{property: 'password'}"
                     >
                     <div class="tips-group">
-<!--                        <p ng-show="userForm.password.$dirty && userForm.password.$error.required" class="error">Password is required</p>-->
                         <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="error">Password must be 8 characters includes 1 digit and 1 letter</p>
+                        <p ng-show="userFrom.firstname.$dirty && userForm.firstname.$error.includes" class="error">Password invalid! Password must be 8 characters includes 1 digit and 1 letter</p>
                     </div>
                 </div>
 
@@ -110,12 +110,11 @@
 
 
     <div class="list-container">
-        <h>++++ {{userCount2}} ++++</h>
+        <h>{{userCount2}}</h>
         <h4 class="list__count">Count of users: {{userCount}}</h4>
         <table class="table" ng-show="usersCount">
             <thead class="table__head">
             <tr class="table__tr table__tr--th">
-                <th class="table__th">ID</th>
                 <th class="table__th">First name</th>
                 <th class="table__th">Last name</th>
                 <th class="table__th">Email</th>
@@ -127,7 +126,6 @@
 
             <tbody class="table__body">
             <tr class="table__tr table__tr--td" ng-repeat="user in users">
-                <td class="table__td">{{user.id}}</td>
                 <td class="table__td">{{user.firstName}}</td>
                 <td class="table__td">{{user.lastName}}</td>
                 <td class="table__td">{{user.email}}</td>
