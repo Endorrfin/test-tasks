@@ -21,9 +21,9 @@ function squareManipulation (url) {
   const delay = 1000;
   const colorSet = {
     initial: 'black',
-    one: 'green',
-    zero: 'blue',
-    wrong: 'red'
+    responseOne: 'green',
+    responseZero: 'blue',
+    responseFailure: 'red'
   };
 
   createSquare();
@@ -50,16 +50,16 @@ function squareManipulation (url) {
     const square = document.getElementById('square');
     try {
       const response = await fetch(url);
+      if (response.status !== 200) return new Error(error);
       const data = await response.json();
-      debugger;
+
       if (data === 1) {
-        square.style.backgroundColor = colorSet.one;
+        square.style.backgroundColor = colorSet.responseOne;
       } else if (data === 0) {
-        square.style.backgroundColor = colorSet.zero;
-      } else {
-        square.style.backgroundColor = colorSet.wrong
+        square.style.backgroundColor = colorSet.responseZero;
       }
     } catch (error) {
+      square.style.backgroundColor = colorSet.responseFailure;
       console.log(`${error.message} something went wrong 👎`);
     }
   };
